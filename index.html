@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Json To Ts</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="./index.css">
+</head>
+
+<body class="d-flex flex-column h-100">
+
+    <nav class="navbar border-btm">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1 lang title-color" style="text-decoration: none !important;">JSON To
+                TS</span>
+        </div>
+    </nav>
+
+    <div>
+        <div class="container">
+            <div class="row h-70 my-3 myeditor">
+                <div class="col-6 h-70 myeditor" style="height:80vh !important">
+                    <div class="title" style="height: 10%;">
+                        <span>Json</span>
+                    </div>
+                    <div id="input-editor" style="height: 90%;"></div>
+                </div>
+                <div class="col-6 h-70 myeditor" style="height:80vh !important">
+                    <div class="title" style="height: 10%;">
+                        <span>Type</span><span style="color:var(--secondary-color)">Script</span>
+                    </div>
+                    <div id="output-editor" style="height: 90%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <!-- <div class="container my-2 h-100"> -->
+    <!-- <br> -->
+    <!-- <div class="row"> -->
+
+    <!-- <div class="col-md-6 col-sm-12 myeditor"> -->
+    <!-- <h4 class="lang title-color">JSON</h4><br>
+                <div style="display: flex !important; height: 100% !important;">
+                    <div id="input-editor" style="flex:1"></div>
+                </div>  -->
+    <!-- </div> -->
+    <!-- <div class="col-md-2 col-sm-12">
+                <div class="container my-2">
+                    <button class="btn btn-primary d-flex mx-auto" onclick="convert()">Convert</button>
+                </div>            
+            </div> -->
+    <!-- <div class="col-md-6 col-sm-12 myeditor">
+                <h4 class="lang title-color">TypeScript</h4>
+                <br>
+                <div id="output-editor" class="h-100 height100">
+
+                </div>
+            </div> -->
+    <!-- </div> -->
+    <!-- </div> -->
+
+
+    <footer class="footer mt-auto">
+        <div class="container-fluid footer-container">
+            <span class="text-muted">Licence: MIT, By Ashutosh Kumbhar</span>
+        </div>
+    </footer>
+
+    <script src="./ace.min.js"></script>
+    <script src="./index.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.17.0/ext-beautify.min.js"
+        integrity="sha512-uXfi0GwpQZcHIhGOMMHeNYtBSjt7qDXjXHmjShWSp+RWMSmjdy69N7M/pufinvQLv6rSYlpbSXqSnLRzWE952w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.17.0/ext-code_lens.min.js"
+        integrity="sha512-81QPqjkXeCVN8i0OfBEGy3Ix+IwfmHwQ7D103quJuOs18KwgO6ra7L//1ZBU1LVMelSMweA0cAQSPAhXVa9zYQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.17.0/theme-monokai.min.js"
+        integrity="sha512-8rSB/wU3KoN3rr1VHwPP4dfpbU063BvH6qzwt0oe9E2ThEchzd8MmJylVPxZ5kLvxsShgtWvc9AtIlS7rmPunA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.17.0/theme-terminal.min.js"
+        integrity="sha512-x30Uzr3F0QJnFK/z+aoM7WuwRX2HnaU3S/g+N0tJ+Io9hy9mNgvKhnWBoV0rzRANYaZHelPRZ9zcA09wONnkhA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.17.0/mode-json.min.js"
+        integrity="sha512-YXUz04sMmhEPQR5FLg4/6MFWcrTzZRobwv6cEVWsX9bfos1lm/Z5hfVz4WB3Z3XyhcVjWWUOvudJ+CCxecDI7Q=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.17.0/mode-typescript.min.js"
+        integrity="sha512-xoywyDdN+kffQr3r86ESZ+0zgfNhwcQOvfUCeQiQCjZEC3h/HprPGd7t5Mfx0xe28nWbElKYYSWS1Hnx1y3u/w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        var editor1 = ace.edit("input-editor");
+        editor1.setTheme("ace/theme/terminal");
+        editor1.session.setMode("ace/mode/json");
+        var editor2 = ace.edit("output-editor");
+        editor2.setTheme("ace/theme/terminal");
+        editor2.session.setMode("ace/mode/typescript");
+
+
+
+
+        //editor1 opertations:
+        let editorValue = "";
+        let parsedJson = "";
+        let outputValue = "";
+        editor1.getSession().on("change", function () {
+            console.log("Change Detected");
+            try {
+                editorValue = editor1.getSession().getValue();
+                try {
+                    parsedJson = JSON.parse(editorValue);
+                    convert(parsedJson);
+                    console.log("Valid Json");
+                } catch (error) {
+                    console.log("Invalid Json");
+                }
+            } catch (error) {
+                console.log("Input Editor Went Wrong");
+            }
+
+
+        })
+
+
+        function convert(value) {
+            try {
+                outputValue = "";
+                editor2.setValue("");
+                let output = convertJsonToTs(JSON.stringify(value), "RootObject");
+                for (let i = 0; i < output.length; i++) {
+                    outputValue += output[i] + "\n";
+                }
+                console.log("Output Value",outputValue);
+                editor2.setValue(outputValue);
+            } catch (error) {
+                console.log("Error", error);
+            }
+        }
+
+
+
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
