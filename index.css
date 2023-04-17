@@ -1,0 +1,80 @@
+:root{
+    --primary-color:#000000;
+    --secondary-color:#05386b;
+    --light-color:#edf5e1;
+}
+
+html,body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background: var(--primary-color);
+}
+
+.footer span{
+    color:var(--light-color) !important
+}
+
+.h-70{
+    height: 70% !important;
+}
+
+.border-btm{
+    border-bottom: 1px solid var(--secondary-color);
+}
+
+.title-color{
+    color: var(--secondary-color) !important;
+}
+
+.myeditor{
+    border: 1px solid var(--secondary-color);
+}
+
+.workspace{
+    display: flex !important;
+    border: 1px solid var(--secondary-color);
+}
+
+.title span{
+    font-size: 2em;
+}
+
+.ace-terminal-theme .ace_gutter {
+    background: #000000 !important;
+    color: steelblue;
+}
+
+
+.ace_scrollbar {
+    contain: strict;
+    position: absolute;
+    right: 0;
+    display: none !important;
+    z-index: 6;
+}
+
+.footer-container{
+    background: var(--secondary-color) !important;
+
+}
+
+.footer{
+    border: 1px soild var(--secondary-color) !important;
+}
+
+
+
+/* hide Scrollbar */
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+#output-editor::-webkit-scrollbar {
+    display: none;
+    height: 60vh !important;
+}
+  
+  /* Hide scrollbar for IE, Edge and Firefox */
+#output-editor {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
